@@ -3,38 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Syafaat - Enhanced Digital CV</title>
+    <title>MUHAMMAD IDHAM - Digital CV</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* ========================================================================== */
-        /* [1] GLOBAL THEMES                                                          */
+        /* [1] GLOBAL THEMES (UPDATED: MUTED "FROSTED STEEL" INSTEAD OF WHITE)        */
         /* ========================================================================== */
 
         :root {
-            --bg-color: #d0e0e0;
-            --text-main: #000000;
-            --header-color: #0000FF;
-            --bold-color: #0a6a0a;
-            --outline-color: #f39c12;
-            --card-bg: #ffffffCC;
-            --header-bg: #ffffffCC;
-            --bg-image-opacity: 0.6;
-            --scroll-color: #00a090;
+            --bg-color: #c4d1df;         /* Cool steel blue-grey (no harsh whites) */
+            --text-main: #111a24;        /* Very dark navy/grey for soft readability */
+            --header-color: #084c82;     /* Deep industrial tech blue */
+            --bold-color: #c74b00;       /* Burnt orange (matching the nodes) */
+            --outline-color: #2b7aab;    /* Muted cyan for borders */
+            --card-bg: #d0dce8E6;        /* Frosted slate-blue card background (90% opacity) */
+            --header-bg: #c4d1dfF2;      /* Frosted steel header */
+            --bg-image-opacity: 0.15;    /* Lower opacity so dark image doesn't clash */
+            --scroll-color: #ff7b00;     /* Orange scrollbar */
         }
 
         [data-theme="dark"] {
-            --bg-color: #203030;
-            --text-main: #f0f0f0;
-            --header-color: #60c0f0;
-            --bold-color: #60f0c0;
-            --outline-color: #f4c430;
-            --card-bg: #1e2323CC;
-            --header-bg: #141919CC;
-            --bg-image-opacity: 0.6;
-            --scroll-color: #30f0e0;
+            --bg-color: #030b14;         /* Very dark navy / almost black */
+            --text-main: #e6f1ff;        /* Off-white blueish text */
+            --header-color: #00e5ff;     /* Neon cyan (matching the glowing lines) */
+            --bold-color: #ff7b00;       /* Neon orange (matching glowing nodes) */
+            --outline-color: #0077b6;    /* Mid-tone blue for borders */
+            --card-bg: #0a1128CC;        /* Dark transparent blue */
+            --header-bg: #030b14E6;      /* Dark frosted header */
+            --bg-image-opacity: 0.6;     /* Higher opacity to let the image shine */
+            --scroll-color: #00e5ff;     /* Neon cyan scrollbar */
         }
 
         /* ========================================================================== */
@@ -153,6 +153,7 @@
             border: 2px solid var(--outline-color);
             border-radius: 12px;
             box-shadow: 0 8px 20px #0000000D;
+            backdrop-filter: blur(5px);
         }
 
         /* ========================================================================== */
@@ -364,7 +365,7 @@
         </div>
 
         <span class="global-title">
-            AHMAD SYAFAAT BIN SAIFUL HAZMI
+            MUHAMMAD IDHAM BIN MOHD ARIF
         </span>
 
         <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
@@ -479,7 +480,7 @@
 
             // Load Variable into View
             if (pageVarName === 'home') {
-                mainContainer.innerHTML = home; // Accesses the bottom variable
+                mainContainer.innerHTML = home; // Ensure you have your `home` variable defined below or in another script
                 headerLeft.innerHTML = `
                     <a href="#" onclick="renderPage('home'); return false;" class="nav-btn" title="Go to Home"><i class="fas fa-home"></i></a>
                     <a href="#menu-section" class="nav-btn" title="Go to CV Menu"><i class="fas fa-list"></i></a>
@@ -540,30 +541,32 @@
     ██████████████████████████████████████████████████████████████████████████████
     -->
     
+
+```html
     <script>
 
         const home = `
         <!-- ====================================================================== -->
-        <!-- BOX 1: ABOUT ME                                                        -->
+        <!-- BOX 1: ABOUT ME (CAREER OBJECTIVE)                                     -->
         <!-- ====================================================================== -->
 
         <section class="card hero">
 
-            <img src="profile.webp" alt="Ahmad Syafaat" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Ahmad+Syafaat&background=0056b3&color=fff&size=200'">
+            <img src="profile.webp" alt="Muhammad Idham" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Muhammad+Idham&background=0056b3&color=fff&size=200'">
 
             <h2 class="hero-title">
-                ABOUT ME
+                CAREER OBJECTIVE
             </h2>
 
             <div class="hero-desc">
                 <p style="margin-bottom: 1rem;">
-                    Ahmad Syafaat is a highly motivated Engineering Technologist-in-training currently completing a Bachelor's degree in Electronic Engineering Technology at Universiti Malaysia Perlis (UniMAP). Built upon a strong vocational background, this experience shaped a practical technician mindset focused on real-world execution, precise troubleshooting, and hands-on diagnostics. His current academic studies effectively bridge this hands-on background with solid theoretical analysis.
+                    A dedicated Electronic Systems candidate eager to apply classroom knowledge to real-world engineering challenges.
                 </p>
                 <p style="margin-bottom: 1rem;">
-                    His technical skills have expanded to focus on Semiconductor IC Design, specifically within the VLSI design flow. He is currently learning and applying hardware logic design (Verilog RTL modeling), physical layout concepts (PD), and timing closure. Known for learning quickly and adapting to change, he continuously improves these skills. He actively integrates Linux environments, Python scripting for workflow automation, and basic EDA tool workflows while maintaining strict adherence to systematic optimization and Quality of Results (QoR).
+                    Brings a strong understanding of electronic systems, including analog and digital circuit design, component testing, and circuit troubleshooting. Also equipped with basic programming knowledge in C and Python for hardware integration.
                 </p>
                 <p style="margin-bottom: 1rem;">
-                    He is actively seeking an industrial internship to learn directly from industry engineers and apply practical engineering fundamentals. His primary career interests include Pre-Silicon Backend, Physical Design, VLSI, Automation, and R&D within the semiconductor sector. Additionally, he is interested in exploring Reliability & Failure Analysis, Data Analytics, QA/QC, and Semiconductor Microfabrication. Driven by a humble approach to new challenges, his objective is to support real-world engineering processes through critical thinking and collaborative teamwork.
+                    Currently, I am actively seeking an internship in the semiconductor field to develop my practical skills, solve technical problems, and support the team's daily operations.
                 </p>
             </div>
         </section>
@@ -578,14 +581,10 @@
             </h2>
 
             <ul class="caps-bullet">
-                <li><i class="fas fa-check-circle"></i> FULL NAME: AHMAD SYAFAAT BIN SAIFUL HAZMI</li>
+                <li><i class="fas fa-check-circle"></i> FULL NAME: MUHAMMAD IDHAM BIN MOHD ARIF </li>
                 <li><i class="fas fa-check-circle"></i> GENDER: MALE</li>
-                <li><i class="fas fa-check-circle"></i> RELIGION: MUSLIM</li>
-                <li><i class="fas fa-check-circle"></i> NATIONALITY: MALAYSIAN</li>
-                <li><i class="fas fa-check-circle"></i> AGE: 22 YEARS OLD (BORN IN 2004)</li>
-                <li><i class="fas fa-check-circle"></i> INTEREST: SEMICONDUCTOR, DIGITAL & ANALOG IC DESIGN, SOC, BACKEND PRE-SILICON, PHYSICAL DESIGN, VLSI, VERIFICATION, R&D</li>
-                <li><i class="fas fa-check-circle"></i> AUTOMATION & TOOLS: LINUX ENVIRONMENT, PYTHON & TCL SCRIPTING FOR TASK AUTOMATION, AND BASIC EDA TOOL WORKFLOWS</li>
-                <li><i class="fas fa-check-circle"></i> OTHER INTERESTS: RELIABILITY & FAILURE ANALYSIS, DATA ANALYTICS, QA/QC, SEMICONDUCTOR MICROFABRICATION</li>
+                <li><i class="fas fa-check-circle"></i> LOCATION: PERAK, MALAYSIA</li>
+                <li><i class="fas fa-check-circle"></i> LANGUAGE: BAHASA MALAYSIA (NATIVE), ENGLISH (FLUENT)</li>
             </ul>
         </section>
 
@@ -617,7 +616,7 @@
             <p class="cv-intro-text">
                 Need an offline copy? Click the button below to download the formal PDF version of my resume for your reference.
             </p>
-            <a href="Resume.pdf" class="menu-btn" download="Resume.pdf">
+            <a href="MUHAMMAD IDHAM BIN MOHD ARIF.pdf" class="menu-btn" download="MUHAMMAD IDHAM BIN MOHD ARIF.pdf">
                 Get My Resume <i class="fas fa-download"></i>
             </a>
         </section>
@@ -634,78 +633,36 @@
 
                 <!-- LINKEDIN -->
                 <div id="linkedin-widget-container">
-                    <div class="badge-base LI-profile-badge li-badge-light" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="syafaware" data-version="v1">
-                        <a class="badge-base__link LI-simple-link" href="https://my.linkedin.com/in/syafaware?trk=profile-badge"></a>
+                    <div class="badge-base LI-profile-badge li-badge-light" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="idham14" data-version="v1">
+                        <a class="badge-base__link LI-simple-link" href="https://linkedin.com/in/idham14?trk=profile-badge"></a>
                     </div>
-                    <div class="badge-base LI-profile-badge li-badge-dark" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="syafaware" data-version="v1">
-                        <a class="badge-base__link LI-simple-link" href="https://my.linkedin.com/in/syafaware?trk=profile-badge"></a>
+                    <div class="badge-base LI-profile-badge li-badge-dark" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="idham14" data-version="v1">
+                        <a class="badge-base__link LI-simple-link" href="https://linkedin.com/in/idham14?trk=profile-badge"></a>
                     </div>
-                    <a href="https://www.linkedin.com/in/syafaware" class="contact-card" id="li-fallback-btn" target="_blank" rel="noopener noreferrer" style="width: 100%;">
+                    <a href="https://linkedin.com/in/idham14" class="contact-card" id="li-fallback-btn" target="_blank" rel="noopener noreferrer" style="width: 100%;">
                         <div class="icon-box bg-li"><i class="fab fa-linkedin-in"></i></div>
                         <div class="info-box">
                             <span class="info-action">LINKEDIN</span>
-                            <span class="info-detail">syafaware</span>
+                            <span class="info-detail">idham14</span>
                         </div>
                     </a>
                 </div>
 
                 <!-- WHATSAPP -->
-                <a href="https://wa.me/601130708013" class="contact-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/60137636484" class="contact-card" target="_blank" rel="noopener noreferrer">
                     <div class="icon-box bg-wa"><i class="fab fa-whatsapp"></i></div>
                     <div class="info-box">
-                        <span class="info-action">WHATSAPP</span>
-                        <span class="info-detail">+60 11-3070 8013</span>
+                        <span class="info-action">PHONE / WHATSAPP</span>
+                        <span class="info-detail">+60 13-7636 484</span>
                     </div>
                 </a>
 
                 <!-- PERSONAL EMAIL -->
-                <a href="mailto:syafaware@gmail.com" class="contact-card">
+                <a href="mailto:idhamlightning2@gmail.com" class="contact-card">
                     <div class="icon-box bg-email"><i class="fas fa-envelope"></i></div>
                     <div class="info-box">
-                        <span class="info-action">PERSONAL EMAIL</span>
-                        <span class="info-detail">syafaware@gmail.com</span>
-                    </div>
-                </a>
-
-                <!-- STUDENT / WORK EMAIL -->
-                <a href="mailto:syafaat@student.unimap.edu.my" class="contact-card">
-                    <div class="icon-box bg-work"><i class="fas fa-university"></i></div>
-                    <div class="info-box">
-                        <span class="info-action">STUDENT / WORK EMAIL</span>
-                        <span class="info-detail">s241373056@studentmail.unimap.edu.my</span>
-                    </div>
-                </a>
-
-            </div>
-
-            <!-- DIGITAL PROFILES -->
-            <h2 class="section-header"><i class="fas fa-globe"></i> DIGITAL PROFILES</h2>
-            <div class="contact-list">
-
-                <!-- GITHUB -->
-                <a href="https://github.com/syafaware" class="contact-card" target="_blank" rel="noopener noreferrer">
-                    <div class="icon-box bg-gh"><i class="fab fa-github"></i></div>
-                    <div class="info-box">
-                        <span class="info-action">GITHUB</span>
-                        <span class="info-detail">syafaware</span>
-                    </div>
-                </a>
-
-                <!-- FACEBOOK -->
-                <a href="https://facebook.com/profile.php?id=100024010848758" class="contact-card" target="_blank" rel="noopener noreferrer">
-                    <div class="icon-box bg-fb"><i class="fab fa-facebook-f"></i></div>
-                    <div class="info-box">
-                        <span class="info-action">FACEBOOK</span>
-                        <span class="info-detail">Ahmad Syafaat</span>
-                    </div>
-                </a>
-
-                <!-- INSTAGRAM -->
-                <a href="https://instagram.com/syafaware" class="contact-card" target="_blank" rel="noopener noreferrer">
-                    <div class="icon-box bg-ig"><i class="fab fa-instagram"></i></div>
-                    <div class="info-box">
-                        <span class="info-action">INSTAGRAM</span>
-                        <span class="info-detail">syafaware</span>
+                        <span class="info-action">EMAIL</span>
+                        <span class="info-detail">idhamlightning2@gmail.com</span>
                     </div>
                 </a>
 
@@ -722,26 +679,12 @@
             
             <div class="timeline-item">
                 <div class="card">
-                    <span class="badge-year">OCT 2024 - PRESENT (EXPECTED MAC 2028)</span>
+                    <span class="badge-year">OCT 2024 - OCT 2028</span>
                     <h3 class="caps-header">BACHELOR'S DEGREE OF ELECTRONIC ENGINEERING TECHNOLOGY (ELECTRONIC SYSTEM)</h3>
-                    <div class="caps-sub">UNIVERSITI MALAYSIA PERLIS (UniMAP)</div>
+                    <div class="caps-sub">UNIVERSITI MALAYSIA PERLIS</div>
                     <ul class="caps-bullet">
-                        <li>CURRENT CGPA: 3.91 (SEMESTER 1 - SEMESTER 4)</li>
-                        <li>ACHIEVEMENT: DEAN'S AWARD RECIPIENT (SEMESTER 1 - SEMESTER 4)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">AUG 2026 - SEP 2026</span>
-                    <h3 class="caps-header">ADVANCED SEMICONDUCTOR ACADEMY OF MALAYSIA (ASEM)</h3>
-                    <div class="caps-sub">DIGITAL IC DESIGN, NATIONAL SEMICONDUCTOR EXCELLENCE PROGRAM (NSEP)</div>
-                    <ul class="caps-bullet">
-                        <li>Completed an intensive, intermediate-level full-flow Digital IC Design training, bridging the gap between theoretical fundamentals and industry-ready execution using SYNOPSYS tools.</li>
-                        <li>Executed front-end workflows including RTL verification using Verdi and logic synthesis via Design Compiler (DC) to generate optimized gate-level netlists.</li>
-                        <li>Performed back-end physical design and layout implementation utilizing IC Compiler II (ICC2).</li>
-                        <li>Conducted comprehensive sign-off timing analysis using PrimeTime, demonstrating practical comprehension of reports, technology files, standard cell libraries, multi-mode/multi-corner (MMMC) scenarios, and timing setups.</li>
+                        <li>CGPA: 3.79 (SEMESTER 1 - SEMESTER 5)</li>
+                        <li>ACADEMIC AWARDS: RECIPIENT OF DEAN'S LIST FOR ALL SEMESTERS IN DEGREE (SEMESTER 1 - SEMESTER 5)</li>
                     </ul>
                 </div>
             </div>
@@ -749,20 +692,17 @@
             <div class="timeline-item">
                 <div class="card">
                     <span class="badge-year">JAN 2019 - OCT 2024</span>
-                    <h3 class="caps-header">DIPLOMA TEKNOLOGI ELEKTRONIK</h3>
-                    <div class="caps-sub">KOLEJ VOKASIONAL SERI ISKANDAR (KVSI)</div>
+                    <h3 class="caps-header">DIPLOMA VOKASIONAL MALAYSIA (TEKNOLOGI ELEKTRONIK)</h3>
+                    <div class="caps-sub">KOLEJ VOKASIONAL SERI ISKANDAR</div>
                     <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">DIPLOMA VOKASIONAL MALAYSIA (DVM)</h4>
-                        <li>CGPA: 3.86</li>
-                        <li>ACHIEVEMENT: ANUGERAH PENGARAH RECIPIENT FOR ALL SEMESTERS</li>
-                        <li>INCLUDES: SIJIL KEMAHIRAN MALAYSIA (SKM TAHAP 3) IN ELECTRONIC EQUIPMENT TROUBLESHOOTING</li>
-                        <li>NEW CERTIFICATE NUMBERING SYSTEM : S102712877</li>
+                        <li>CGPA: 3.72</li>
+                        <li>SIJIL KEMAHIRAN MALAYSIA (SKM TAHAP 3): ELECTRONIC EQUIPMENT TROUBLESHOOTING, REPAIR & MAINTENANCE - LEVEL 3</li>
+                        <li>NEW CERTIFICATE NUMBERING SYSTEM: S102712913</li>
 
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">SIJIL VOKASIONAL MALAYSIA (SVM)</h4>
-                        <li>CGPA ACADEMIC : 3.60</li>
-                        <li>CGPA VOCATIONAL : 4.00</li>
-                        <li>CGPA OVERALL : 3.81</li>
-                        <li>ACHIEVEMENT: ANUGERAH PENGARAH RECIPIENT FOR ALL SEMESTERS</li>
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">SIJIL VOKASIONAL MALAYSIA (TEKNOLOGI ELEKTRONIK)</h4>
+                        <li>PNGK AKEDEMIK: 3.48</li>
+                        <li>PNGK VOKASIONAL: 3.93</li>
+                        <li>PNGK KESELURUHAN: 3.71</li>
                     </ul>
                 </div>
             </div>
@@ -781,22 +721,10 @@
                 <div class="card">
                     <span class="badge-year">2024</span>
                     <h3 class="caps-header">MOBILE PHONE TECHNICIAN</h3>
-                    <div class="caps-sub">INFOIFIX REPAIR PHONE SERI ISKANDAR</div>
+                    <div class="caps-sub">GEEKFIX REPAIR PHONE SERI ISKANDAR</div>
                     <ul class="caps-bullet">
-                        <li>DIAGNOSED ELECTRONIC ISSUES USING SCHEMATIC DIAGRAMS, MEASUREMENT, AND TROUBLESHOOTING TOOLS.</li>
-                        <li>PERFORMED SYSTEMATIC TROUBLESHOOTING ON MOBILE DEVICES BASED ON ROOT CAUSE, SYMPTOMS AND COMPLAINTS.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2023</span>
-                    <h3 class="caps-header">GENERAL WORKER</h3>
-                    <div class="caps-sub">D NAIM TYRE AND SPORT RIM SERI ISKANDAR</div>
-                    <ul class="caps-bullet">
-                        <li>DEMONSTRATED DISCIPLINE, TEAMWORK, AND A CONTINUOUS EFFORT TO IMPROVE.</li>
-                        <li>ENHANCED BASIC TECHNICAL KNOWLEDGE IN THE AUTOMOTIVE-RELATED FIELD.</li>
+                        <li>DIAGNOSED CUSTOMER PHONE USING SUITABLE EQUIPMENT AND FIND THE BEST SOLUTION FOR CUSTOMER</li>
+                        <li>CARRY OUT REPAIR DEPEND ON THE DAMAGE AND CUSTOMER AGREEMENT</li>
                     </ul>
                 </div>
             </div>
@@ -808,35 +736,37 @@
             <div class="timeline-item">
                 <div class="card">
                     <span class="badge-year">2026</span>
-                    <h3 class="caps-header">PEMBIMBING PELAJAR MINGGU SUAI KENAL (PPMS 26/27) – EXCO ANCHOR & PENDAFTARAN</h3>
-                    <div class="caps-sub">FRESHMEN REGISTRATION DAY (INTAKE 2026/2027)</div>
+                    <h3 class="caps-header">JUDGING COMMITTEE VOLUNTEERS (ENGINEERING TECHNOLOGY CATEGORY)</h3>
+                    <div class="caps-sub">PROGRAM INTEGRATED DESIGN SMART SYSTEM CHALLENGE (IDSSC) 2026</div>
                     <ul class="caps-bullet">
-                        <li>FACILITATED THE REGISTRATION PROCESS FOR MAIN CAMPUS NEW INTAKES (FOCUSING ON FKTEN, FKC, FKTE, FKTM) DISSEMINATING CRUCIAL REGISTRATION & ORIENTATION INFORMATION TO STREAMLINE LOGISTICS FOR STUDENTS AND PARENTS.</li>
-                        <li>MANAGED REAL-TIME COMMUNICATIONS IN COMMUNITY GROUPS AND COORDINATED STUDENT SCHEDULES TO ENSURE SMOOTH EVENT EXECUTION AND TIMELY UPDATES.</li>
+                        <li>FACILITATED EVALUATION PROCESSES FOR INDUSTRY JUDGES TO ENSURE SMOOTH PROGRAM EXECUTION.</li>
+                        <li>MAKE SURE THE JUDGE EVALUATE ALL THE PARTICIPANT EQUALLY WITH THE SAME TIME LIMIT</li>
                     </ul>
                 </div>
             </div>
             
             <div class="timeline-item">
                 <div class="card">
-                    <span class="badge-year">2026</span>
-                    <h3 class="caps-header">LEADER OF JUDGING COMMITTEE VOLUNTEERS (ENGINEERING TECHNOLOGY CATEGORY)</h3>
-                    <div class="caps-sub">INTEGRATED DESIGN SMART SYSTEMS CHALLENGE (IDSCC) 2026</div>
+                    <span class="badge-year">VOLUNTEER</span>
+                    <h3 class="caps-header">COMMUNITY SERVICES</h3>
+                    <div class="caps-sub">MASJID LAMA BOTA KANAN</div>
                     <ul class="caps-bullet">
-                        <li>ASSISTED INVITED INDUSTRY PANEL JUDGES WITH EVALUATIONS TO ENSURE SMOOTH PROGRAM EXECUTION.</li>
-                        <li>COORDINATED TEAM TIME MANAGEMENT AND MAINTAINED REAL-TIME COMMUNICATION TO ENSURE ALL MEMBERS WERE UP-TO-DATE WITH LATEST EVENT UPDATES.</li>
+                        <li>ENGAGED IN TEAMWORK-DRIVEN COMMUNITY SERVICE TO CLEAN AND REVIVE THE MOSQUE</li>
+                        <li>STRENGTHENING BONDS WITH THE LOCAL COMMUNITY</li>
                     </ul>
                 </div>
             </div>
+        </div>
 
+        <!-- SECTION 3: REFERENCE -->
+        <h2 class="sub-section-title"><i class="fas fa-address-book"></i> REFERENCE</h2>
+        <div class="timeline">
             <div class="timeline-item">
                 <div class="card">
-                    <span class="badge-year">2023</span>
-                    <h3 class="caps-header">COMMUNITY SERVICE VOLUNTEER</h3>
-                    <div class="caps-sub">MASJID LAMA BOTA KANAN</div>
+                    <h3 class="caps-header">TS. DR. MUHAMMAD HAFIZ AB AZIZ</h3>
+                    <div class="caps-sub">ACADEMIC SUPERVISOR</div>
                     <ul class="caps-bullet">
-                        <li>ENGAGED IN TEAMWORK-DRIVEN COMMUNITY SERVICE TO CLEAN AND REVIVE THE MOSQUE PREMISES.</li>
-                        <li>STRENGTHENED BONDS AND FOSTERED POSITIVE RELATIONSHIPS WITH THE LOCAL COMMUNITY.</li>
+                        <li><i class="fas fa-envelope"></i> EMAIL: muhamadhafiz@unimap.edu.my</li>
                     </ul>
                 </div>
             </div>
@@ -847,268 +777,72 @@
         const page3 = `
         <h1 class="page-title"><i class="fas fa-users"></i> PARTICIPATION</h1>
 
-        <!-- SECTION 1: PROFESSIONAL UPSKILLING -->
-        <h2 class="sub-section-title"><i class="fas fa-laptop-code"></i> PROFESSIONAL UPSKILLING</h2>
-        <div class="timeline">
-            
-            <!-- TAHUN 2026 -->
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2026</span>
-                    <h3 class="caps-header">CERTIFICATIONS & WORKSHOPS</h3>
-                    <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">NATIONAL SEMICONDUCTOR EXCELLENCE PROGRAM (NSEP): DIGITAL IC DESIGN (ASEM)</h4>
-                        <li>Intensive full-flow IC design training from RTL synthesis to physical layout and timing sign-off using Synopsys tools (Verdi, DC, ICC2, PrimeTime).</li>
-                        
-                        <h4 class="caps-mini-header">CHIPINVENTOR WORKSHOP (ASEM)</h4>
-                        <li>Fundamental exposure to IC innovation, semiconductor logic, and hardware design concepts.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">CHIPSTART 2.0 WORKSHOP (ASEM)</h4>
-                        <li>Practical introduction to semiconductor fundamentals and basic IC logic design workflows.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">IC DESIGN WORKSHOP (ASEM)</h4>
-                        <li>Introductory training on integrated circuit logic and fundamental layout structure.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">EMBEDDED SYSTEMS WORKSHOP (ASEM)</h4>
-                        <li>Basic principles of embedded system architecture and hardware implementation.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">KURSUS KEPIMPINAN (AKM)</h4>
-                        <li>Explored student leadership principles, teamwork, and professional conduct.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">DIALOG MAHASISWA (AKM)</h4>
-                        <li>Participated in intellectual discussions on national development and youth roles.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INTRODUCTION TO ARM ARCHITECTURE (ARM)</h4>
-                        <li>Introductory module on ARM microprocessor instruction sets and system architecture.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">GOOGLE IT AUTOMATION WITH PYTHON (COURSERA)</h4>
-                        <li>Foundational skills in Python scripting for basic system and task automation.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MICROSOFT COPILOT & AI AGENT DEVELOPMENT (TRAINOCATE)</h4>
-                        <li>Virtual training session on Generative AI concepts and basic Copilot Studio features.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">AWS CENDEKIAWAN: AI APP BUILDING (AWS & IMPAK UniMAP)</h4>
-                        <li>Explored fundamental concepts of cloud deployment and basic AI application building.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">LEAN SIX SIGMA YELLOW & WHITE BELT (CSSC)</h4>
-                        <li>Foundational concepts in process improvement, defect reduction, and practical problem-solving.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- TAHUN 2025 -->
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2025</span>
-                    <h3 class="caps-header">TECHNICAL TRAINING</h3>
-                    <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">MEMS TRAINING (UniMAP)</h4>
-                        <li>Basic exposure to MEMS design principles and fundamental sensor technology.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">IC DESIGN: SCHEMATIC TO LAYOUT (TVET JELITA & UniMAP)</h4>
-                        <li>Practical introduction to the IC design flow, from schematic creation to layout basics.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">PLC SIEMENS INTEGRATED TRAINING (TVET JELITA & UniMAP)</h4>
-                        <li>Hands-on introduction to Programmable Logic Controller (PLC) systems for basic automation.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MATLAB, SIMULINK & SIGNAL PROCESSING ONRAMP (MATHWORKS)</h4>
-                        <li>Basics of the MATLAB environment, graphical programming, and fundamental signal processing algorithms.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">BASIC MICROSOFT EXCEL COURSE</h4>
-                        <li>Fundamental spreadsheet management, basic data formatting, and standard formulas.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 2: SEMINARS, ACADEMIC TALKS & WORKSHOPS -->
-        <h2 class="sub-section-title"><i class="fas fa-microphone-alt"></i> SEMINARS, ACADEMIC TALKS & WORKSHOPS</h2>
-        <div class="timeline">
-            
-            <!-- TAHUN 2026 -->
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2026</span>
-                    <h3 class="caps-header">ACADEMIC & PROFESSIONAL DISCOURSE</h3>
-                    <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">IDSSC 2026 PARTICIPATION</h4>
-                        <li>Attended as a volunteer as judging committee in assisting industry panel to evaluate information for the Integrated Digital Smart Systems Challenge.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MACHINE LEARNING WITH PYTHON</h4>
-                        <li>Introductory webinar on basic machine learning concepts.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MY PROFESSIONAL CV WORKSHOP</h4>
-                        <li>Brief exposure to effective resume and CV formatting.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- TAHUN 2025 -->
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2025</span>
-                    <h3 class="caps-header">ENGINEERING SEMINARS & CAREER DEVELOPMENT</h3>
-                    <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">READY4WORK & CAREER WORKSHOP (UniMAP)</h4>
-                        <li>Attended sessions covering workplace readiness, transition, and basic career planning strategies.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">RESUME & LINKEDIN OPTIMIZATION (FACILITATED BY CISCO)</h4>
-                        <li>Learned quick tips for professional profile optimization.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">TEKNOLOGI DAN ILMU DISCOURSE</h4>
-                        <li>Listened to intellectual discussions on technology and knowledge by Dato' Dr. Zainal.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">ISICS STEM SERIES 22</h4>
-                        <li>Attended general academic talks on emerging STEM topics.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">ADVANCED MS570EX CALCULATOR WORKSHOP</h4>
-                        <li>Brief demonstration of advanced engineering calculator functions.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INEE NANOE: CARBON-BASED MATERIALS</h4>
-                        <li>Introductory talk on carbon-based applications by the Institute of Nano Electronic Engineering (INEE).</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">RESEARCH ON MICROSTRUCTURAL EVOLUTION (CEGEOGTECH)</h4>
-                        <li>Attended academic presentations on material research by Fakulti Kejuruteraan Kimia & Mekanikal.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">GROUND PENETRATING RADAR FOR REBAR CORROSION</h4>
-                        <li>Webinar on radar applications in civil engineering.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- TAHUN 2024 -->
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">2024</span>
-                    <h3 class="caps-header">SUSTAINABILITY & NANOELECTRONICS</h3>
-                    <ul class="caps-bullet">
-                        <h4 class="caps-mini-header">SUSTAINABILITY WEBINAR SERIES 8: GREEN PROCUREMENT</h4>
-                        <li>Brief exposure to industrial sustainability concepts and green awareness programs.</li>
-
-                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INEE NANOELECTRONIC WORLD</h4>
-                        <li>Academic talk on future directions in nanoelectronics hosted by INEE.</li>
-                    </ul>
-                </div>
-            </div>
-
+        <div class="placeholder-card">
+            <i class="fas fa-calendar-alt placeholder-icon"></i>
+            <h3 class="placeholder-title">NO CURRENT ENTRIES</h3>
+            <p class="placeholder-desc">Extracurricular participation and professional upskilling records will be updated here in the future.</p>
         </div>
         `;
 
 
         const page4 = `
-        <h1 class="page-title"><i class="fas fa-trophy"></i> AWARDS & PARTICIPATION</h1>
-
-        <!-- SECTION 1: NOTABLE AWARDS -->
-        <h2 class="sub-section-title"><i class="fas fa-award"></i> NOTABLE AWARDS</h2>
+        <h1 class="page-title"><i class="fas fa-trophy"></i> AWARDS</h1>
         
         <div class="placeholder-card">
             <i class="fas fa-medal placeholder-icon"></i>
             <h3 class="placeholder-title">FUTURE MILESTONES IN PROGRESS</h3>
             <p class="placeholder-desc">Continuously striving for professional excellence. Future certifications and prestigious recognitions will be updated here.</p>
         </div>
-
-        <!-- SECTION 2: EXHIBITION PARTICIPATION & MEDALS -->
-        <h2 class="sub-section-title"><i class="fas fa-chalkboard-teacher"></i> EXHIBITION PARTICIPATION & MEDALS</h2>
-        
-        <div class="placeholder-card">
-            <i class="fas fa-rocket placeholder-icon"></i>
-            <h3 class="placeholder-title">SEEKING OPPORTUNITIES</h3>
-            <p class="placeholder-desc">Actively developing technical projects. Future participation in innovation exhibitions and competitions will be recorded here.</p>
-        </div>
         `;
 
 
         const page5 = `
-        <h1 class="page-title"><i class="fas fa-laptop-code"></i> SKILLS & EXPERTISE</h1>
+        <h1 class="page-title"><i class="fas fa-laptop-code"></i> SKILLS</h1>
 
         <div class="skills-grid">
             
-            <!-- H1: EXPERTISE (PLACEHOLDER BOX) -->
-            <div class="card placeholder-card">
-                <i class="fas fa-compass placeholder-icon"></i>
-                <h3 class="placeholder-title">EXPERTISE</h3>
-                <p class="placeholder-desc">This space is a blank canvas, eagerly awaiting the professional milestones, specialized mastery, and industry journeys that lie ahead.</p>
-            </div>
-
-            <!-- H1: INDUSTRIAL & UPSKILLING -->
-            <div class="card">
-                <h2 class="sub-section-title"><i class="fas fa-cogs"></i> INDUSTRIAL & UPSKILLING</h2>
-                <ul class="caps-bullet">
-                    <li>
-                        <div class="skill-title"><i class="fas fa-microchip"></i> PLC & MEMS:</div>
-                        <div class="skill-desc">Foundational knowledge in industrial logic controllers and micro-electromechanical sensors; ready for advanced industry application.</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-chart-line"></i> PROCESS OPTIMIZATION:</div>
-                        <div class="skill-desc">Lean Six Sigma methodologies for defect reduction and systematic workflow improvement.</div>
-                    </li>
-                </ul>
-            </div>
-
             <!-- H1: TECHNICAL SKILLS -->
             <div class="card">
                 <h2 class="sub-section-title"><i class="fas fa-toolbox"></i> TECHNICAL SKILLS</h2>
-                
-                <h4 class="caps-mini-header">HARDWARE & ARCHITECTURE</h4>
                 <ul class="caps-bullet">
                     <li>
-                        <div class="skill-title"><i class="fas fa-microchip"></i> IC DESIGN:</div>
-                        <div class="skill-desc">Schematic & Layout implementation.</div>
+                        <div class="skill-title"><i class="fas fa-bolt"></i> ANALOG & DIGITAL ELECTRONICS:</div>
+                        <div class="skill-desc">Hardware Troubleshooting, Circuit Testing & Instrumentation (Oscilloscope, DMM).</div>
                     </li>
                     <li>
-                        <div class="skill-title"><i class="fas fa-code"></i> VERILOG HDL:</div>
-                        <div class="skill-desc">Structural design & automated TCL testbench scripting.</div>
+                        <div class="skill-title"><i class="fas fa-microchip"></i> HARDWARE DESIGN:</div>
+                        <div class="skill-desc">PCB Design & Soldering.</div>
                     </li>
                     <li>
-                        <div class="skill-title"><i class="fas fa-sitemap"></i> COMPUTER ARCHITECTURE:</div>
-                        <div class="skill-desc">Von Neumann, Harvard concepts, 8085 microprocessor, and ARM/RISC-V fundamentals.</div>
+                        <div class="skill-title"><i class="fas fa-code"></i> PROGRAMMING:</div>
+                        <div class="skill-desc">C, Python.</div>
                     </li>
                     <li>
-                        <div class="skill-title"><i class="fas fa-bolt"></i> DIGITAL & ANALOG ELECTRONICS:</div>
-                        <div class="skill-desc">Core fundamental applications and practical circuit design.</div>
-                    </li>
-                </ul>
-
-                <h4 class="caps-mini-header">SOFTWARE & AUTOMATION</h4>
-                <ul class="caps-bullet" style="margin-bottom: 0;">
-                    <li>
-                        <div class="skill-title"><i class="fab fa-python"></i> PYTHON:</div>
-                        <div class="skill-desc">System automation and integration.</div>
+                        <div class="skill-title"><i class="fas fa-laptop-code"></i> EDA SIMULATION TOOLS:</div>
+                        <div class="skill-desc">LTspice/Multisim.</div>
                     </li>
                     <li>
-                        <div class="skill-title"><i class="fas fa-laptop-code"></i> PROGRAMMING:</div>
-                        <div class="skill-desc">C/C++ & Java (Object-Oriented Programming).</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-robot"></i> AI-ASSISTED WORKFLOW:</div>
-                        <div class="skill-desc">Leveraging AI agents for development efficiency.</div>
+                        <div class="skill-title"><i class="fas fa-layer-group"></i> SEMICONDUCTOR:</div>
+                        <div class="skill-desc">Semiconductor Fundamentals.</div>
                     </li>
                 </ul>
             </div>
 
-            <!-- H1: SOFT SKILLS -->
+            <!-- H1: PROFESSIONAL & SOFT SKILLS -->
             <div class="card">
-                <h2 class="sub-section-title"><i class="fas fa-user-cog"></i> SOFT SKILLS</h2>
+                <h2 class="sub-section-title"><i class="fas fa-user-cog"></i> PROFESSIONAL & SOFT SKILLS</h2>
+                
+                <h4 class="caps-mini-header">PROFESSIONAL SKILLS</h4>
+                <ul class="caps-bullet">
+                    <li>
+                        <div class="skill-desc">Systematic Debugging, Technical Documentation, Time Management, Discipline, Teamwork.</div>
+                    </li>
+                </ul>
+
+                <h4 class="caps-mini-header" style="margin-top: 1.5rem;">SOFT SKILLS</h4>
                 <ul class="caps-bullet" style="margin-bottom: 0;">
                     <li>
-                        <div class="skill-title"><i class="fas fa-users"></i> LEADERSHIP & TEAMWORK:</div>
-                        <div class="skill-desc">Active in intellectual discussions, leadership initiatives, and building productive professional networks.</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-lightbulb"></i> CRITICAL THINKING & ACTIVE LEARNING:</div>
-                        <div class="skill-desc">Prioritizes interactive, two-way communication and continuous intellectual growth.</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-tachometer-alt"></i> FAST LEARNER:</div>
-                        <div class="skill-desc">Quickly grasps, explores, and applies new concepts through hands-on experience.</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-sync-alt"></i> ADAPTABILITY & INDEPENDENCE:</div>
-                        <div class="skill-desc">Maintains consistent performance in dynamic environments, working independently and unaffected by peer pressure.</div>
-                    </li>
-                    <li>
-                        <div class="skill-title"><i class="fas fa-puzzle-piece"></i> PROBLEM SOLVING:</div>
-                        <div class="skill-desc">Employs a practical "technician mindset" for effective root-cause analysis and troubleshooting.</div>
+                        <div class="skill-desc">Problem Solving, Critical Thinking, Adaptability & Independence, Active Learning, Collaboration.</div>
                     </li>
                 </ul>
             </div>
@@ -1118,109 +852,12 @@
 
 
         const page6 = `
-        <h1 class="page-title"><i class="fas fa-project-diagram"></i> PROJECTS & PORTFOLIO</h1>
+        <h1 class="page-title"><i class="fas fa-project-diagram"></i> PROJECT</h1>
 
-        <!-- SECTION 1: TECHNICAL FIELD -->
-        <h2 class="sub-section-title"><i class="fas fa-cogs"></i> TECHNICAL FIELD</h2>
-        <div class="timeline">
-            
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">JULY 2026</span>
-                    <h3 class="caps-header">IC DESIGN MINI PROJECT</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> End-to-end IC Design flow from schematic creation to layout implementation.
-                    </div>
-                    <a href="https://github.com/Syafaware/IC-Design-Mini-Project" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i> VIEW REPOSITORY
-                    </a>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">JUNE 2026</span>
-                    <h3 class="caps-header">COMPUTER ARCHITECTURE MINI PROJECT (VERILOG HDL)</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> Comprehensive Verilog HDL project covering structural design, automated TCL testbench scripting, and core computer architecture fundamentals.
-                    </div>
-                    <a href="https://github.com/Syafaware/Computer-Architecture-Mini-Project" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i> VIEW REPOSITORY
-                    </a>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">FEBRUARY 2026</span>
-                    <h3 class="caps-header">OOP: SMART TEMPERATURE MONITOR SYSTEM</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> Object-Oriented Programming (OOP) application integrating a smart temperature monitoring sensor with real-time Telegram bot warning messages.
-                    </div>
-                    <a href="https://github.com/Syafaware/Object-Oriented-Programming-Mini-Project" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i> VIEW REPOSITORY
-                    </a>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">JUNE 2025</span>
-                    <h3 class="caps-header">DIGITAL SYSTEMS: DIGITAL DICE</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> Designed and implemented a Digital Dice system utilizing Moore Finite State Machine (FSM) based on fundamental logic components.
-                    </div>
-                    <a href="https://github.com/Syafaware/Digital-System-Mini-Project" class="project-link" target="_blank">
-                        <i class="fab fa-github"></i> VIEW REPOSITORY
-                    </a>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">MARCH 2024</span>
-                    <h3 class="caps-header">FINAL YEAR PROJECT: ROBOTIC ARM WITH ESP32</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> Technical Writing & Documentation. While the hardware execution faced practical limitations, this project served as a major milestone in technical writing. Took full ownership of synthesizing research, structuring data, and writing the complete A-to-Z project report to ensure successful academic deliverability.
-                    </div>
-                    <div class="no-link">
-                        <i class="fas fa-ban"></i> NO REPOSITORY AVAILABLE
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- SECTION 2: PERSONAL DEVELOPMENT & GENERAL KNOWLEDGE -->
-        <h2 class="sub-section-title"><i class="fas fa-book-reader"></i> PERSONAL DEVELOPMENT & GENERAL KNOWLEDGE</h2>
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">AUGUST 2026</span>
-                    <h3 class="caps-header">FALSAFAH DAN ISU SEMASA COURSEWORK</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> A web-based compilation of academic coursework submissions detailing philosophical analyses and current issue discourses.
-                    </div>
-                    <a href="https://syafaware.github.io/Falsafah-dan-Isu-Semasa" class="project-link" target="_blank">
-                        <i class="fas fa-globe"></i> VISIT WEBSITE
-                    </a>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="card">
-                    <span class="badge-year">JUN 2026</span>
-                    <h3 class="caps-header">TERJEMAHAN BACAAN ARAB</h3>
-                    <div class="project-desc">
-                        <strong>FOCUS:</strong> A structured, personal compilation of Arabic reading translations, documented for continuous learning and easy reference.
-                    </div>
-                    <a href="https://syafaware.github.io/Terjemahan" class="project-link" target="_blank">
-                        <i class="fas fa-globe"></i> VISIT WEBSITE
-                    </a>
-                </div>
-            </div>
-
+        <div class="placeholder-card">
+            <i class="fas fa-rocket placeholder-icon"></i>
+            <h3 class="placeholder-title">PROJECTS IN DEVELOPMENT</h3>
+            <p class="placeholder-desc">Actively developing technical and academic projects. Future engineering portfolios will be recorded here.</p>
         </div>
         `;
 
@@ -1246,7 +883,6 @@
             </div>
         </div>
         `;
-
     </script>
 </body>
 </html>
