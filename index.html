@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Syafaat - Enhanced Digital CV</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ========================================================================== */
+        /* [1] GLOBAL THEMES                                                          */
+        /* ========================================================================== */
+
+        :root {
+            --bg-color: #d0e0e0;
+            --text-main: #000000;
+            --header-color: #0000FF;
+            --bold-color: #0a6a0a;
+            --outline-color: #f39c12;
+            --card-bg: #ffffffCC;
+            --header-bg: #ffffffCC;
+            --bg-image-opacity: 0.6;
+            --scroll-color: #00a090;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #203030;
+            --text-main: #f0f0f0;
+            --header-color: #60c0f0;
+            --bold-color: #60f0c0;
+            --outline-color: #f4c430;
+            --card-bg: #1e2323CC;
+            --header-bg: #141919CC;
+            --bg-image-opacity: 0.6;
+            --scroll-color: #30f0e0;
+        }
+
+        /* ========================================================================== */
+        /* [2] BASE LAYOUT                                                            */
+        /* ========================================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ========================================================================== */
+        /* [3] BACKGROUND EFFECTS                                                     */
+        /* ========================================================================== */
+
+        .bg-fallback {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(var(--header-color) 2px, transparent 2px),
+                radial-gradient(var(--outline-color) 2px, transparent 2px);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.15;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;
+            background-image: url('background.webp');
+            background-size: 100% auto; background-repeat: repeat-y;
+            background-attachment: fixed; background-position: top center;
+            opacity: var(--bg-image-opacity); transition: opacity 0.4s ease;
+        }
+
+        /* ========================================================================== */
+        /* [4] SCROLL PROGRESS BAR                                                    */
+        /* ========================================================================== */
+
+        .scroll-progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+            background-color: transparent; z-index: 1001;
+        }
+
+        .scroll-progress-bar {
+            height: 100%; width: 0%;
+            background-color: var(--scroll-color);
+            box-shadow: 0 0 8px 2px var(--scroll-color);
+            border-radius: 0 2px 2px 0; transition: width 0.5s ease-out;
+        }
+
+        /* ========================================================================== */
+        /* [5] GLOBAL HEADER                                                          */
+        /* ========================================================================== */
+
+        header.global-header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--header-bg); backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px #0000001A; display: flex;
+            justify-content: space-between; align-items: center;
+            padding: 1rem 5%; z-index: 1000; border-bottom: 2px solid var(--outline-color);
+        }
+
+        .header-left-group { display: flex; gap: 10px; align-items: center; }
+
+        .nav-btn {
+            background: none; border: 2px solid var(--outline-color);
+            color: var(--header-color); font-size: 1.1rem;
+            border-radius: 50%; width: 40px; height: 40px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.1); background-color: var(--outline-color); color: var(--bg-color);
+        }
+
+        .global-title {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            font-size: clamp(0.7rem, 2vw, 1.2rem); font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; text-align: center; color: var(--header-color);
+            max-width: 45vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        .theme-toggle {
+            background: none; border: none; color: var(--outline-color);
+            font-size: 1.4rem; cursor: pointer;
+        }
+
+        /* ========================================================================== */
+        /* [6] MAIN CONTENT & GLOBAL CARD BASE                                        */
+        /* ========================================================================== */
+
+        main {
+            padding: 110px 5% 4rem 5%; flex: 1; max-width: 800px;
+            margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 2px solid var(--outline-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px #0000000D;
+        }
+
+        /* ========================================================================== */
+        /* [7] SMART THEME SCOPING (PREVENTS DESIGN CONFLICTS ACROSS PAGES)           */
+        /* ========================================================================== */
+        
+        /* ---> SCOPE FOR HOME STYLES <--- */
+        .theme-home .card { padding: 2rem; animation: fadeUp 0.6s ease-out forwards; }
+        .theme-home .caps-bullet { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .theme-home .caps-bullet li { font-weight: 600; text-transform: uppercase; color: var(--text-main); display: flex; gap: 10px; align-items: flex-start; }
+        .theme-home .caps-bullet li i { color: var(--bold-color); margin-top: 5px; }
+
+        /* ---> SCOPE FOR PAGE 1-4, 6-7 STYLES <--- */
+        .theme-page1 .card, .theme-page2 .card, .theme-page3 .card, .theme-page4 .card { padding: 1.5rem 2rem; animation: fadeUp 0.6s ease-out forwards;}
+        .theme-page5 .card, .theme-page6 .card, .theme-page7 .card { padding: 1.5rem 2rem; display: flex; flex-direction: column; animation: fadeUp 0.6s ease-out forwards;}
+
+        .theme-page1 .caps-bullet, .theme-page2 .caps-bullet, .theme-page3 .caps-bullet, .theme-page4 .caps-bullet, .theme-page6 .caps-bullet, .theme-page7 .caps-bullet { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .theme-page1 .caps-bullet li, .theme-page2 .caps-bullet li, .theme-page3 .caps-bullet li, .theme-page4 .caps-bullet li, .theme-page6 .caps-bullet li, .theme-page7 .caps-bullet li { font-weight: 600; text-transform: uppercase; color: var(--text-main); display: flex; align-items: flex-start; }
+        .theme-page1 .caps-bullet li::before, .theme-page2 .caps-bullet li::before, .theme-page3 .caps-bullet li::before, .theme-page4 .caps-bullet li::before, .theme-page6 .caps-bullet li::before, .theme-page7 .caps-bullet li::before { content: '▸'; color: var(--bold-color); font-size: 1.2rem; margin-right: 10px; line-height: 1; }
+
+        /* ---> SCOPE FOR PAGE 5 STYLES <--- */
+        .theme-page5 .caps-bullet { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 1rem; }
+        .theme-page5 .caps-bullet li { font-weight: 600; text-transform: uppercase; color: var(--text-main); display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+
+        /* ========================================================================== */
+        /* [8] HOME SPECIFIC CLASSES                                                  */
+        /* ========================================================================== */
+
+        .section-header {
+            font-size: 1.8rem; font-weight: 700; color: var(--header-color);
+            text-transform: uppercase; border-bottom: 2px dashed var(--outline-color);
+            padding-bottom: 0.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 15px;
+        }
+
+        strong, b { color: var(--bold-color); font-weight: 700; }
+        .hero { text-align: center; }
+        
+        .profile-img {
+            width: 180px; height: 180px; border-radius: 25px; object-fit: cover;
+            border: 5px solid var(--outline-color); padding: 5px;
+            display: block; margin: 0 auto 1.5rem auto; animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-title { font-size: 1.3rem; font-weight: 700; color: var(--header-color); text-transform: uppercase; margin-bottom: 1rem; }
+        .hero-desc { font-size: 1rem; text-align: justify; }
+        .cv-intro-text { font-size: 1.1rem; font-weight: 600; color: var(--text-main); text-align: justify; margin-bottom: 1.5rem; border-left: 4px solid var(--bold-color); padding-left: 15px; }
+        
+        .menu-grid { display: flex; flex-direction: column; gap: 1rem; scroll-margin-top: 100px; }
+        .menu-btn {
+            padding: 1.2rem 2rem; background-color: var(--card-bg); color: var(--header-color);
+            border: 2px solid var(--outline-color); border-left: 8px solid var(--outline-color);
+            border-radius: 8px; font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
+            text-decoration: none; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 10px #0000000D; transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .menu-btn:hover { transform: translateX(10px); box-shadow: 0 6px 15px #f39c124D; }
+        
+        #contact-section { scroll-margin-top: 100px; }
+        .contact-list { display: flex; flex-direction: column; gap: 1.2rem; margin-bottom: 2rem; }
+        .contact-card {
+            display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 12px;
+            background-color: var(--card-bg); border: 2px solid var(--outline-color); text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .contact-card:hover { transform: scale(1.02); box-shadow: 0 4px 15px #f39c1233; }
+        .contact-card:hover .info-detail { color: var(--bold-color); }
+        
+        .icon-box { width: 55px; height: 55px; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #ffffff; font-size: 1.8rem; flex-shrink: 0; }
+        .info-box { display: flex; flex-direction: column; text-align: left; }
+        .info-action { font-size: 0.85rem; font-weight: 700; color: var(--header-color); text-transform: uppercase; }
+        .info-detail { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+        
+        .bg-wa { background-color: #25D366; } .bg-email { background-color: #ea4335; } .bg-work { background-color: #0077b5; }
+        .bg-li { background-color: #0077b5; } .bg-fb { background-color: #1877f2; } .bg-gh { background-color: #333333; }
+        .bg-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        
+        #linkedin-widget-container { position: relative; width: 100%; display: flex; justify-content: center; min-height: 81px; }
+        .li-badge-light, .li-badge-dark { display: none; width: 100%; }
+        body:not([data-theme="dark"]) .li-badge-light.badge-ready { display: block; }
+        body[data-theme="dark"] .li-badge-dark.badge-ready { display: block; }
+        #linkedin-widget-container.linkedin-loaded #li-fallback-btn { display: none !important; }
+
+        /* ========================================================================== */
+        /* [9] PAGE 1-7 SPECIFIC CLASSES                                              */
+        /* ========================================================================== */
+
+        .page-title {
+            font-size: 2rem; color: var(--header-color); text-transform: uppercase;
+            background-color: var(--card-bg); border: 2px solid var(--outline-color);
+            border-radius: 12px; padding: 1rem 1.5rem; box-shadow: 0 8px 20px #0000000D;
+            display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;
+        }
+        
+        .sub-section-title {
+            font-size: 1.5rem; color: var(--header-color); text-transform: uppercase;
+            margin-top: 1.5rem; margin-bottom: 1rem; font-weight: 700; display: flex; align-items: center; gap: 10px;
+            background-color: var(--card-bg); padding: 0.8rem 1.5rem; border-radius: 8px; border-left: 6px solid var(--bold-color);
+        }
+
+        .timeline {
+            border-left: 3px solid var(--outline-color); margin-left: 15px; padding-left: 30px;
+            display: flex; flex-direction: column; gap: 2.5rem; margin-top: 1rem; margin-bottom: 2rem;
+        }
+        
+        .timeline-item { position: relative; animation: fadeUp 0.6s ease-out forwards; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -39px; top: 15px; width: 15px; height: 15px;
+            background-color: var(--bold-color); border-radius: 50%; box-shadow: 0 0 0 5px var(--bg-color); z-index: 1;
+        }
+        
+        .badge-year {
+            display: inline-block; background-color: var(--outline-color); color: var(--bg-color); padding: 5px 15px;
+            border-radius: 20px; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .caps-header { font-size: 1.3rem; font-weight: 700; color: var(--header-color); text-transform: uppercase; margin-bottom: 0.2rem; }
+        .caps-sub { font-weight: 600; color: var(--bold-color); text-transform: uppercase; margin-bottom: 1rem; font-size: 1rem; }
+        .caps-mini-header {
+            font-size: 0.95rem; font-weight: 700; color: var(--header-color); text-transform: uppercase; margin-top: 1rem; margin-bottom: 0.3rem;
+            border-bottom: 1px dashed var(--outline-color); padding-bottom: 3px; display: inline-block;
+        }
+
+        /* PAGE 4 Classes */
+        .placeholder-card {
+            text-align: center; padding: 3rem 1.5rem; border: 2px dashed var(--outline-color);
+            background-color: transparent; box-shadow: none; border-radius: 12px; animation: fadeUp 0.6s ease-out forwards;
+            justify-content: center; align-items: center;
+        }
+        .placeholder-icon { font-size: 3rem; color: var(--header-color); margin-bottom: 1rem; opacity: 0.7; }
+        .placeholder-title { font-size: 1.2rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .placeholder-desc { font-size: 1rem; color: var(--text-main); opacity: 0.8; }
+
+        /* PAGE 5 Classes */
+        .skills-grid { display: flex; flex-direction: column; gap: 2rem; }
+        .skill-title {
+            color: var(--header-color); font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem;
+            display: flex; align-items: center; gap: 10px; font-size: 1.05rem; letter-spacing: 0.5px;
+        }
+        .skill-title i { color: var(--bold-color); font-size: 1.2rem; }
+        .skill-desc { color: var(--text-main); font-weight: 500; line-height: 1.6; padding-left: 28px; }
+
+        /* PAGE 6 Classes */
+        .project-desc {
+            color: var(--text-main); font-weight: 500; line-height: 1.6; text-align: justify;
+            margin-bottom: 1rem; border-left: 3px solid var(--bold-color); padding-left: 15px;
+        }
+        
+        .project-link {
+            display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 8px;
+            background-color: var(--bg-color); border: 2px solid var(--outline-color); color: var(--text-main);
+            font-weight: 700; text-transform: uppercase; text-decoration: none; font-size: 0.95rem; align-self: flex-start;
+            transition: transform 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-link i { font-size: 1.2rem; color: var(--header-color); transition: color 0.3s ease; }
+        .project-link:hover { transform: scale(1.02); border-color: var(--bold-color); color: var(--bold-color); box-shadow: 0 4px 15px #0a6a0a33; }
+        .project-link:hover i { color: var(--bold-color); }
+        
+        .no-link {
+            display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 8px;
+            background-color: transparent; border: 2px dashed #999; color: #777; font-weight: 600; text-transform: uppercase;
+            font-size: 0.9rem; align-self: flex-start; cursor: not-allowed;
+        }
+
+        /* ========================================================================== */
+        /* [10] ANIMATIONS & MEDIA QUERIES                                            */
+        /* ========================================================================== */
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 600px) {
+            main { padding-left: 4%; padding-right: 4%; }
+            .theme-home .card { padding: 1.4rem; } 
+            .section-header { font-size: 1.4rem; }
+            .global-title { max-width: 38vw; }
+            .profile-img { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================================================== -->
+    <!-- SCROLL PROGRESS BAR                                                        -->
+    <!-- ========================================================================== -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="scrollProgress"></div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!-- BACKGROUND LAYERS                                                          -->
+    <!-- ========================================================================== -->
+    <div class="bg-fallback"></div>
+    <div class="bg-image"></div>
+
+    <!-- ========================================================================== -->
+    <!-- GLOBAL HEADER                                                              -->
+    <!-- ========================================================================== -->
+    <header class="global-header">
+        <div class="header-left-group" id="dynamic-header-left">
+            <!-- Buttons are injected automatically by the Javascript Router based on view -->
+        </div>
+
+        <span class="global-title">
+            AHMAD SYAFAAT BIN SAIFUL HAZMI
+        </span>
+
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+    </header>
+
+    <!-- ========================================================================== -->
+    <!-- MAIN CONTENT CANVAS (ROUTER TARGET)                                        -->
+    <!-- ========================================================================== -->
+    <main id="app-main-container">
+        <!-- ALL EDITABLE WORD BOX VARIABLES ARE DYNAMICALLY RENDERED HERE -->
+    </main>
+
+    <!-- ========================================================================== -->
+    <!-- JAVASCRIPT: LOGIC & FUNCTIONALITY                                          -->
+    <!-- ========================================================================== -->
+    <script>
+        /* ====================================================================== */
+        /* [1] THEME SYSTEM                                                       */
+        /* ====================================================================== */
+        const themeIcon = document.getElementById("themeIcon");
+
+        function checkSavedTheme() {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.setAttribute("data-theme", "dark");
+                themeIcon.className = "fas fa-sun";
+            }
+        }
+
+        function toggleTheme() {
+            if (document.body.getAttribute("data-theme") === "dark") {
+                document.body.removeAttribute("data-theme");
+                localStorage.setItem("theme", "light");
+                themeIcon.className = "fas fa-moon";
+            } else {
+                document.body.setAttribute("data-theme", "dark");
+                localStorage.setItem("theme", "dark");
+                themeIcon.className = "fas fa-sun";
+            }
+        }
+
+        /* ====================================================================== */
+        /* [2] SCROLL PROGRESS                                                    */
+        /* ====================================================================== */
+        function updateScrollProgress() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrollPercentage;
+            if (scrollHeight <= 0) { scrollPercentage = 100; } 
+            else { scrollPercentage = (scrollTop / scrollHeight) * 100; }
+            document.getElementById("scrollProgress").style.width = scrollPercentage + "%";
+        }
+
+        window.addEventListener("scroll", updateScrollProgress);
+        window.addEventListener("resize", updateScrollProgress);
+
+        /* ====================================================================== */
+        /* [3] LINKEDIN BADGE SYSTEM                                              */
+        /* ====================================================================== */
+        const ENABLE_LINKEDIN_BADGE = true;
+
+        function initializeLinkedInBadge() {
+            const container = document.getElementById("linkedin-widget-container");
+            const fallbackBtn = document.getElementById("li-fallback-btn");
+            const lightBadge = document.querySelector(".li-badge-light");
+            const darkBadge = document.querySelector(".li-badge-dark");
+
+            if (!ENABLE_LINKEDIN_BADGE) return;
+            if (!container || !fallbackBtn || !lightBadge || !darkBadge) return;
+            if (document.querySelector('script[data-linkedin-badge-script]')) return;
+
+            const script = document.createElement("script");
+            script.src = "https://platform.linkedin.com/badges/js/profile.js";
+            script.async = true;
+            script.defer = true;
+            script.setAttribute("data-linkedin-badge-script", "true");
+
+            script.onload = function () {
+                let attempts = 0;
+                const maxAttempts = 20;
+                const checkBadge = setInterval(function () {
+                    attempts++;
+                    const iframe = container.querySelector("iframe");
+                    if (iframe) {
+                        clearInterval(checkBadge);
+                        lightBadge.classList.add("badge-ready");
+                        darkBadge.classList.add("badge-ready");
+                        container.classList.add("linkedin-loaded");
+                        return;
+                    }
+                    if (attempts >= maxAttempts) {
+                        clearInterval(checkBadge);
+                        fallbackBtn.style.display = "flex";
+                    }
+                }, 250);
+            };
+
+            script.onerror = function () { fallbackBtn.style.display = "flex"; };
+            document.body.appendChild(script);
+        }
+
+        /* ====================================================================== */
+        /* [4] SINGLE PAGE APPLICATION ROUTER (NEW METHOD)                        */
+        /* ====================================================================== */
+        function renderPage(pageVarName, targetSection = null) {
+            const mainContainer = document.getElementById("app-main-container");
+            const headerLeft = document.getElementById("dynamic-header-left");
+
+            // Apply Theme Scoping class safely without touching inner HTML structure
+            mainContainer.className = "theme-" + pageVarName;
+
+            // Load Variable into View
+            if (pageVarName === 'home') {
+                mainContainer.innerHTML = home; // Accesses the bottom variable
+                headerLeft.innerHTML = `
+                    <a href="#" onclick="renderPage('home'); return false;" class="nav-btn" title="Go to Home"><i class="fas fa-home"></i></a>
+                    <a href="#menu-section" class="nav-btn" title="Go to CV Menu"><i class="fas fa-list"></i></a>
+                    <a href="#contact-section" class="nav-btn" title="Go to Contact"><i class="fas fa-address-book"></i></a>
+                `;
+                setTimeout(initializeLinkedInBadge, 100);
+            } else {
+                let pageContent = "";
+                switch(pageVarName) {
+                    case 'page1': pageContent = page1; break;
+                    case 'page2': pageContent = page2; break;
+                    case 'page3': pageContent = page3; break;
+                    case 'page4': pageContent = page4; break;
+                    case 'page5': pageContent = page5; break;
+                    case 'page6': pageContent = page6; break;
+                    case 'page7': pageContent = page7; break;
+                }
+                mainContainer.innerHTML = pageContent;
+                headerLeft.innerHTML = `
+                    <a href="#" onclick="renderPage('home'); return false;" class="nav-btn" title="Go to Home"><i class="fas fa-home"></i></a>
+                    <a href="#" onclick="renderPage('home', 'menu-section'); return false;" class="nav-btn" title="Back to Menu"><i class="fas fa-arrow-left"></i></a>
+                `;
+            }
+
+            // Scroll Management
+            if (targetSection) {
+                setTimeout(() => {
+                    const el = document.getElementById(targetSection);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        /* ====================================================================== */
+        /* [5] PAGE INITIALIZATION                                                */
+        /* ====================================================================== */
+        window.addEventListener("load", function () {
+            checkSavedTheme();
+            updateScrollProgress();
+            renderPage('home'); // Loads Home by default
+        });
+    </script>
+
+
+    <!-- 
+    ██████████████████████████████████████████████████████████████████████████████
+    ██                                                                          ██
+    ██              📝 EDITABLE WORD BOXES (DIRECT VARIABLES)                   ██
+    ██                                                                          ██
+    ██==========================================================================██
+    ██   CROSS CHECKING AND CODING ABILITY INSTRUCTION:                         ██
+    ██   You can edit the text and HTML for each page directly inside the       ██
+    ██   backticks ( ` ` ) below. Each variable operates independently and      ██
+    ██   injects directly into the core code without jumping to other files.    ██
+    ██   Note: If you need to use a backtick inside your text, write it as \`   ██
+    ██████████████████████████████████████████████████████████████████████████████
+    -->
+    
+    <script>
+
+        const home = `
+        <!-- ====================================================================== -->
+        <!-- BOX 1: ABOUT ME                                                        -->
+        <!-- ====================================================================== -->
+
+        <section class="card hero">
+
+            <img src="profile.webp" alt="Ahmad Syafaat" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=Ahmad+Syafaat&background=0056b3&color=fff&size=200'">
+
+            <h2 class="hero-title">
+                ABOUT ME
+            </h2>
+
+            <div class="hero-desc">
+                <p style="margin-bottom: 1rem;">
+                    Ahmad Syafaat is a highly motivated Engineering Technologist-in-training currently completing a Bachelor's degree in Electronic Engineering Technology at Universiti Malaysia Perlis (UniMAP). Built upon a strong vocational background, this experience shaped a practical technician mindset focused on real-world execution, precise troubleshooting, and hands-on diagnostics. His current academic studies effectively bridge this hands-on background with solid theoretical analysis.
+                </p>
+                <p style="margin-bottom: 1rem;">
+                    His technical skills have expanded to focus on Semiconductor IC Design, specifically within the VLSI design flow. He is currently learning and applying hardware logic design (Verilog RTL modeling), physical layout concepts (PD), and timing closure. Known for learning quickly and adapting to change, he continuously improves these skills. He actively integrates Linux environments, Python scripting for workflow automation, and basic EDA tool workflows while maintaining strict adherence to systematic optimization and Quality of Results (QoR).
+                </p>
+                <p style="margin-bottom: 1rem;">
+                    He is actively seeking an industrial internship to learn directly from industry engineers and apply practical engineering fundamentals. His primary career interests include Pre-Silicon Backend, Physical Design, VLSI, Automation, and R&D within the semiconductor sector. Additionally, he is interested in exploring Reliability & Failure Analysis, Data Analytics, QA/QC, and Semiconductor Microfabrication. Driven by a humble approach to new challenges, his objective is to support real-world engineering processes through critical thinking and collaborative teamwork.
+                </p>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- BOX 2: PERSONAL DETAILS                                                -->
+        <!-- ====================================================================== -->
+
+        <section class="card">
+            <h2 class="section-header">
+                <i class="fas fa-id-card"></i> PERSONAL DETAILS
+            </h2>
+
+            <ul class="caps-bullet">
+                <li><i class="fas fa-check-circle"></i> FULL NAME: AHMAD SYAFAAT BIN SAIFUL HAZMI</li>
+                <li><i class="fas fa-check-circle"></i> GENDER: MALE</li>
+                <li><i class="fas fa-check-circle"></i> RELIGION: MUSLIM</li>
+                <li><i class="fas fa-check-circle"></i> NATIONALITY: MALAYSIAN</li>
+                <li><i class="fas fa-check-circle"></i> AGE: 22 YEARS OLD (BORN IN 2004)</li>
+                <li><i class="fas fa-check-circle"></i> INTEREST: SEMICONDUCTOR, DIGITAL & ANALOG IC DESIGN, SOC, BACKEND PRE-SILICON, PHYSICAL DESIGN, VLSI, VERIFICATION, R&D</li>
+                <li><i class="fas fa-check-circle"></i> AUTOMATION & TOOLS: LINUX ENVIRONMENT, PYTHON & TCL SCRIPTING FOR TASK AUTOMATION, AND BASIC EDA TOOL WORKFLOWS</li>
+                <li><i class="fas fa-check-circle"></i> OTHER INTERESTS: RELIABILITY & FAILURE ANALYSIS, DATA ANALYTICS, QA/QC, SEMICONDUCTOR MICROFABRICATION</li>
+            </ul>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- BOX 3: CV INTRO & MENU                                                 -->
+        <!-- ====================================================================== -->
+
+        <section class="card">
+            <p class="cv-intro-text">
+                This digital CV serves as a comprehensive record of his academic journey, technical experiences, and personal growth. It reflects his commitment to continuous improvement and his ambition to pursue a successful career in the engineering technology field.
+            </p>
+
+            <div id="menu-section" class="menu-grid">
+                <a href="#" onclick="renderPage('page1'); return false;" class="menu-btn">EDUCATION <i class="fas fa-graduation-cap"></i></a>
+                <a href="#" onclick="renderPage('page2'); return false;" class="menu-btn">EXPERIENCE <i class="fas fa-briefcase"></i></a>
+                <a href="#" onclick="renderPage('page3'); return false;" class="menu-btn">PARTICIPATION <i class="fas fa-users"></i></a>
+                <a href="#" onclick="renderPage('page4'); return false;" class="menu-btn">AWARDS <i class="fas fa-trophy"></i></a>
+                <a href="#" onclick="renderPage('page5'); return false;" class="menu-btn">SKILLS <i class="fas fa-laptop-code"></i></a>
+                <a href="#" onclick="renderPage('page6'); return false;" class="menu-btn">PROJECT <i class="fas fa-project-diagram"></i></a>
+            </div>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- BOX 3.5: DOWNLOAD RESUME                                               -->
+        <!-- ====================================================================== -->
+
+        <section class="card">
+            <h2 class="section-header"><i class="fas fa-file-pdf"></i> GET MY CV</h2>
+            <p class="cv-intro-text">
+                Need an offline copy? Click the button below to download the formal PDF version of my resume for your reference.
+            </p>
+            <a href="Resume.pdf" class="menu-btn" download="Resume.pdf">
+                Get My Resume <i class="fas fa-download"></i>
+            </a>
+        </section>
+
+        <!-- ====================================================================== -->
+        <!-- BOX 4: DIRECT CONTACT                                                  -->
+        <!-- ====================================================================== -->
+
+        <section id="contact-section" class="card">
+
+            <!-- DIRECT CONTACT HEADER -->
+            <h2 class="section-header"><i class="fas fa-address-book"></i> DIRECT CONTACT</h2>
+            <div class="contact-list">
+
+                <!-- LINKEDIN -->
+                <div id="linkedin-widget-container">
+                    <div class="badge-base LI-profile-badge li-badge-light" data-locale="en_US" data-size="large" data-theme="light" data-type="HORIZONTAL" data-vanity="syafaware" data-version="v1">
+                        <a class="badge-base__link LI-simple-link" href="https://my.linkedin.com/in/syafaware?trk=profile-badge"></a>
+                    </div>
+                    <div class="badge-base LI-profile-badge li-badge-dark" data-locale="en_US" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="syafaware" data-version="v1">
+                        <a class="badge-base__link LI-simple-link" href="https://my.linkedin.com/in/syafaware?trk=profile-badge"></a>
+                    </div>
+                    <a href="https://www.linkedin.com/in/syafaware" class="contact-card" id="li-fallback-btn" target="_blank" rel="noopener noreferrer" style="width: 100%;">
+                        <div class="icon-box bg-li"><i class="fab fa-linkedin-in"></i></div>
+                        <div class="info-box">
+                            <span class="info-action">LINKEDIN</span>
+                            <span class="info-detail">syafaware</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- WHATSAPP -->
+                <a href="https://wa.me/601130708013" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="icon-box bg-wa"><i class="fab fa-whatsapp"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">WHATSAPP</span>
+                        <span class="info-detail">+60 11-3070 8013</span>
+                    </div>
+                </a>
+
+                <!-- PERSONAL EMAIL -->
+                <a href="mailto:syafaware@gmail.com" class="contact-card">
+                    <div class="icon-box bg-email"><i class="fas fa-envelope"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">PERSONAL EMAIL</span>
+                        <span class="info-detail">syafaware@gmail.com</span>
+                    </div>
+                </a>
+
+                <!-- STUDENT / WORK EMAIL -->
+                <a href="mailto:syafaat@student.unimap.edu.my" class="contact-card">
+                    <div class="icon-box bg-work"><i class="fas fa-university"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">STUDENT / WORK EMAIL</span>
+                        <span class="info-detail">s241373056@studentmail.unimap.edu.my</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- DIGITAL PROFILES -->
+            <h2 class="section-header"><i class="fas fa-globe"></i> DIGITAL PROFILES</h2>
+            <div class="contact-list">
+
+                <!-- GITHUB -->
+                <a href="https://github.com/syafaware" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="icon-box bg-gh"><i class="fab fa-github"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">GITHUB</span>
+                        <span class="info-detail">syafaware</span>
+                    </div>
+                </a>
+
+                <!-- FACEBOOK -->
+                <a href="https://facebook.com/profile.php?id=100024010848758" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="icon-box bg-fb"><i class="fab fa-facebook-f"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">FACEBOOK</span>
+                        <span class="info-detail">Ahmad Syafaat</span>
+                    </div>
+                </a>
+
+                <!-- INSTAGRAM -->
+                <a href="https://instagram.com/syafaware" class="contact-card" target="_blank" rel="noopener noreferrer">
+                    <div class="icon-box bg-ig"><i class="fab fa-instagram"></i></div>
+                    <div class="info-box">
+                        <span class="info-action">INSTAGRAM</span>
+                        <span class="info-detail">syafaware</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+        `;
+
+
+        const page1 = `
+        <h1 class="page-title"><i class="fas fa-graduation-cap"></i> EDUCATION</h1>
+
+        <!-- SECTION 1: EDUCATION TIMELINE -->
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">OCT 2024 - PRESENT (EXPECTED MAC 2028)</span>
+                    <h3 class="caps-header">BACHELOR'S DEGREE OF ELECTRONIC ENGINEERING TECHNOLOGY (ELECTRONIC SYSTEM)</h3>
+                    <div class="caps-sub">UNIVERSITI MALAYSIA PERLIS (UniMAP)</div>
+                    <ul class="caps-bullet">
+                        <li>CURRENT CGPA: 3.91 (SEMESTER 1 - SEMESTER 4)</li>
+                        <li>ACHIEVEMENT: DEAN'S AWARD RECIPIENT (SEMESTER 1 - SEMESTER 4)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">AUG 2026 - SEP 2026</span>
+                    <h3 class="caps-header">ADVANCED SEMICONDUCTOR ACADEMY OF MALAYSIA (ASEM)</h3>
+                    <div class="caps-sub">DIGITAL IC DESIGN, NATIONAL SEMICONDUCTOR EXCELLENCE PROGRAM (NSEP)</div>
+                    <ul class="caps-bullet">
+                        <li>Completed an intensive, intermediate-level full-flow Digital IC Design training, bridging the gap between theoretical fundamentals and industry-ready execution using SYNOPSYS tools.</li>
+                        <li>Executed front-end workflows including RTL verification using Verdi and logic synthesis via Design Compiler (DC) to generate optimized gate-level netlists.</li>
+                        <li>Performed back-end physical design and layout implementation utilizing IC Compiler II (ICC2).</li>
+                        <li>Conducted comprehensive sign-off timing analysis using PrimeTime, demonstrating practical comprehension of reports, technology files, standard cell libraries, multi-mode/multi-corner (MMMC) scenarios, and timing setups.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">JAN 2019 - OCT 2024</span>
+                    <h3 class="caps-header">DIPLOMA TEKNOLOGI ELEKTRONIK</h3>
+                    <div class="caps-sub">KOLEJ VOKASIONAL SERI ISKANDAR (KVSI)</div>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">DIPLOMA VOKASIONAL MALAYSIA (DVM)</h4>
+                        <li>CGPA: 3.86</li>
+                        <li>ACHIEVEMENT: ANUGERAH PENGARAH RECIPIENT FOR ALL SEMESTERS</li>
+                        <li>INCLUDES: SIJIL KEMAHIRAN MALAYSIA (SKM TAHAP 3) IN ELECTRONIC EQUIPMENT TROUBLESHOOTING</li>
+                        <li>NEW CERTIFICATE NUMBERING SYSTEM : S102712877</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">SIJIL VOKASIONAL MALAYSIA (SVM)</h4>
+                        <li>CGPA ACADEMIC : 3.60</li>
+                        <li>CGPA VOCATIONAL : 4.00</li>
+                        <li>CGPA OVERALL : 3.81</li>
+                        <li>ACHIEVEMENT: ANUGERAH PENGARAH RECIPIENT FOR ALL SEMESTERS</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        `;
+
+
+        const page2 = `
+        <h1 class="page-title"><i class="fas fa-briefcase"></i> EXPERIENCE</h1>
+
+        <!-- SECTION 1: WORK EXPERIENCE -->
+        <h2 class="sub-section-title"><i class="fas fa-tools"></i> WORK EXPERIENCE</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2024</span>
+                    <h3 class="caps-header">MOBILE PHONE TECHNICIAN</h3>
+                    <div class="caps-sub">INFOIFIX REPAIR PHONE SERI ISKANDAR</div>
+                    <ul class="caps-bullet">
+                        <li>DIAGNOSED ELECTRONIC ISSUES USING SCHEMATIC DIAGRAMS, MEASUREMENT, AND TROUBLESHOOTING TOOLS.</li>
+                        <li>PERFORMED SYSTEMATIC TROUBLESHOOTING ON MOBILE DEVICES BASED ON ROOT CAUSE, SYMPTOMS AND COMPLAINTS.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2023</span>
+                    <h3 class="caps-header">GENERAL WORKER</h3>
+                    <div class="caps-sub">D NAIM TYRE AND SPORT RIM SERI ISKANDAR</div>
+                    <ul class="caps-bullet">
+                        <li>DEMONSTRATED DISCIPLINE, TEAMWORK, AND A CONTINUOUS EFFORT TO IMPROVE.</li>
+                        <li>ENHANCED BASIC TECHNICAL KNOWLEDGE IN THE AUTOMOTIVE-RELATED FIELD.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: VOLUNTEER EXPERIENCE -->
+        <h2 class="sub-section-title"><i class="fas fa-hands-helping"></i> VOLUNTEER EXPERIENCE</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2026</span>
+                    <h3 class="caps-header">PEMBIMBING PELAJAR MINGGU SUAI KENAL (PPMS 26/27) – EXCO ANCHOR & PENDAFTARAN</h3>
+                    <div class="caps-sub">FRESHMEN REGISTRATION DAY (INTAKE 2026/2027)</div>
+                    <ul class="caps-bullet">
+                        <li>FACILITATED THE REGISTRATION PROCESS FOR MAIN CAMPUS NEW INTAKES (FOCUSING ON FKTEN, FKC, FKTE, FKTM) DISSEMINATING CRUCIAL REGISTRATION & ORIENTATION INFORMATION TO STREAMLINE LOGISTICS FOR STUDENTS AND PARENTS.</li>
+                        <li>MANAGED REAL-TIME COMMUNICATIONS IN COMMUNITY GROUPS AND COORDINATED STUDENT SCHEDULES TO ENSURE SMOOTH EVENT EXECUTION AND TIMELY UPDATES.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2026</span>
+                    <h3 class="caps-header">LEADER OF JUDGING COMMITTEE VOLUNTEERS (ENGINEERING TECHNOLOGY CATEGORY)</h3>
+                    <div class="caps-sub">INTEGRATED DESIGN SMART SYSTEMS CHALLENGE (IDSCC) 2026</div>
+                    <ul class="caps-bullet">
+                        <li>ASSISTED INVITED INDUSTRY PANEL JUDGES WITH EVALUATIONS TO ENSURE SMOOTH PROGRAM EXECUTION.</li>
+                        <li>COORDINATED TEAM TIME MANAGEMENT AND MAINTAINED REAL-TIME COMMUNICATION TO ENSURE ALL MEMBERS WERE UP-TO-DATE WITH LATEST EVENT UPDATES.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2023</span>
+                    <h3 class="caps-header">COMMUNITY SERVICE VOLUNTEER</h3>
+                    <div class="caps-sub">MASJID LAMA BOTA KANAN</div>
+                    <ul class="caps-bullet">
+                        <li>ENGAGED IN TEAMWORK-DRIVEN COMMUNITY SERVICE TO CLEAN AND REVIVE THE MOSQUE PREMISES.</li>
+                        <li>STRENGTHENED BONDS AND FOSTERED POSITIVE RELATIONSHIPS WITH THE LOCAL COMMUNITY.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        `;
+
+
+        const page3 = `
+        <h1 class="page-title"><i class="fas fa-users"></i> PARTICIPATION</h1>
+
+        <!-- SECTION 1: PROFESSIONAL UPSKILLING -->
+        <h2 class="sub-section-title"><i class="fas fa-laptop-code"></i> PROFESSIONAL UPSKILLING</h2>
+        <div class="timeline">
+            
+            <!-- TAHUN 2026 -->
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2026</span>
+                    <h3 class="caps-header">CERTIFICATIONS & WORKSHOPS</h3>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">NATIONAL SEMICONDUCTOR EXCELLENCE PROGRAM (NSEP): DIGITAL IC DESIGN (ASEM)</h4>
+                        <li>Intensive full-flow IC design training from RTL synthesis to physical layout and timing sign-off using Synopsys tools (Verdi, DC, ICC2, PrimeTime).</li>
+                        
+                        <h4 class="caps-mini-header">CHIPINVENTOR WORKSHOP (ASEM)</h4>
+                        <li>Fundamental exposure to IC innovation, semiconductor logic, and hardware design concepts.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">CHIPSTART 2.0 WORKSHOP (ASEM)</h4>
+                        <li>Practical introduction to semiconductor fundamentals and basic IC logic design workflows.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">IC DESIGN WORKSHOP (ASEM)</h4>
+                        <li>Introductory training on integrated circuit logic and fundamental layout structure.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">EMBEDDED SYSTEMS WORKSHOP (ASEM)</h4>
+                        <li>Basic principles of embedded system architecture and hardware implementation.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">KURSUS KEPIMPINAN (AKM)</h4>
+                        <li>Explored student leadership principles, teamwork, and professional conduct.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">DIALOG MAHASISWA (AKM)</h4>
+                        <li>Participated in intellectual discussions on national development and youth roles.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INTRODUCTION TO ARM ARCHITECTURE (ARM)</h4>
+                        <li>Introductory module on ARM microprocessor instruction sets and system architecture.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">GOOGLE IT AUTOMATION WITH PYTHON (COURSERA)</h4>
+                        <li>Foundational skills in Python scripting for basic system and task automation.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MICROSOFT COPILOT & AI AGENT DEVELOPMENT (TRAINOCATE)</h4>
+                        <li>Virtual training session on Generative AI concepts and basic Copilot Studio features.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">AWS CENDEKIAWAN: AI APP BUILDING (AWS & IMPAK UniMAP)</h4>
+                        <li>Explored fundamental concepts of cloud deployment and basic AI application building.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">LEAN SIX SIGMA YELLOW & WHITE BELT (CSSC)</h4>
+                        <li>Foundational concepts in process improvement, defect reduction, and practical problem-solving.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAHUN 2025 -->
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2025</span>
+                    <h3 class="caps-header">TECHNICAL TRAINING</h3>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">MEMS TRAINING (UniMAP)</h4>
+                        <li>Basic exposure to MEMS design principles and fundamental sensor technology.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">IC DESIGN: SCHEMATIC TO LAYOUT (TVET JELITA & UniMAP)</h4>
+                        <li>Practical introduction to the IC design flow, from schematic creation to layout basics.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">PLC SIEMENS INTEGRATED TRAINING (TVET JELITA & UniMAP)</h4>
+                        <li>Hands-on introduction to Programmable Logic Controller (PLC) systems for basic automation.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MATLAB, SIMULINK & SIGNAL PROCESSING ONRAMP (MATHWORKS)</h4>
+                        <li>Basics of the MATLAB environment, graphical programming, and fundamental signal processing algorithms.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">BASIC MICROSOFT EXCEL COURSE</h4>
+                        <li>Fundamental spreadsheet management, basic data formatting, and standard formulas.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: SEMINARS, ACADEMIC TALKS & WORKSHOPS -->
+        <h2 class="sub-section-title"><i class="fas fa-microphone-alt"></i> SEMINARS, ACADEMIC TALKS & WORKSHOPS</h2>
+        <div class="timeline">
+            
+            <!-- TAHUN 2026 -->
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2026</span>
+                    <h3 class="caps-header">ACADEMIC & PROFESSIONAL DISCOURSE</h3>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">IDSSC 2026 PARTICIPATION</h4>
+                        <li>Attended as a volunteer as judging committee in assisting industry panel to evaluate information for the Integrated Digital Smart Systems Challenge.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MACHINE LEARNING WITH PYTHON</h4>
+                        <li>Introductory webinar on basic machine learning concepts.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">MY PROFESSIONAL CV WORKSHOP</h4>
+                        <li>Brief exposure to effective resume and CV formatting.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAHUN 2025 -->
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2025</span>
+                    <h3 class="caps-header">ENGINEERING SEMINARS & CAREER DEVELOPMENT</h3>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">READY4WORK & CAREER WORKSHOP (UniMAP)</h4>
+                        <li>Attended sessions covering workplace readiness, transition, and basic career planning strategies.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">RESUME & LINKEDIN OPTIMIZATION (FACILITATED BY CISCO)</h4>
+                        <li>Learned quick tips for professional profile optimization.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">TEKNOLOGI DAN ILMU DISCOURSE</h4>
+                        <li>Listened to intellectual discussions on technology and knowledge by Dato' Dr. Zainal.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">ISICS STEM SERIES 22</h4>
+                        <li>Attended general academic talks on emerging STEM topics.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">ADVANCED MS570EX CALCULATOR WORKSHOP</h4>
+                        <li>Brief demonstration of advanced engineering calculator functions.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INEE NANOE: CARBON-BASED MATERIALS</h4>
+                        <li>Introductory talk on carbon-based applications by the Institute of Nano Electronic Engineering (INEE).</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">RESEARCH ON MICROSTRUCTURAL EVOLUTION (CEGEOGTECH)</h4>
+                        <li>Attended academic presentations on material research by Fakulti Kejuruteraan Kimia & Mekanikal.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">GROUND PENETRATING RADAR FOR REBAR CORROSION</h4>
+                        <li>Webinar on radar applications in civil engineering.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAHUN 2024 -->
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">2024</span>
+                    <h3 class="caps-header">SUSTAINABILITY & NANOELECTRONICS</h3>
+                    <ul class="caps-bullet">
+                        <h4 class="caps-mini-header">SUSTAINABILITY WEBINAR SERIES 8: GREEN PROCUREMENT</h4>
+                        <li>Brief exposure to industrial sustainability concepts and green awareness programs.</li>
+
+                        <h4 class="caps-mini-header" style="margin-top: 1.5rem;">INEE NANOELECTRONIC WORLD</h4>
+                        <li>Academic talk on future directions in nanoelectronics hosted by INEE.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        `;
+
+
+        const page4 = `
+        <h1 class="page-title"><i class="fas fa-trophy"></i> AWARDS & PARTICIPATION</h1>
+
+        <!-- SECTION 1: NOTABLE AWARDS -->
+        <h2 class="sub-section-title"><i class="fas fa-award"></i> NOTABLE AWARDS</h2>
+        
+        <div class="placeholder-card">
+            <i class="fas fa-medal placeholder-icon"></i>
+            <h3 class="placeholder-title">FUTURE MILESTONES IN PROGRESS</h3>
+            <p class="placeholder-desc">Continuously striving for professional excellence. Future certifications and prestigious recognitions will be updated here.</p>
+        </div>
+
+        <!-- SECTION 2: EXHIBITION PARTICIPATION & MEDALS -->
+        <h2 class="sub-section-title"><i class="fas fa-chalkboard-teacher"></i> EXHIBITION PARTICIPATION & MEDALS</h2>
+        
+        <div class="placeholder-card">
+            <i class="fas fa-rocket placeholder-icon"></i>
+            <h3 class="placeholder-title">SEEKING OPPORTUNITIES</h3>
+            <p class="placeholder-desc">Actively developing technical projects. Future participation in innovation exhibitions and competitions will be recorded here.</p>
+        </div>
+        `;
+
+
+        const page5 = `
+        <h1 class="page-title"><i class="fas fa-laptop-code"></i> SKILLS & EXPERTISE</h1>
+
+        <div class="skills-grid">
+            
+            <!-- H1: EXPERTISE (PLACEHOLDER BOX) -->
+            <div class="card placeholder-card">
+                <i class="fas fa-compass placeholder-icon"></i>
+                <h3 class="placeholder-title">EXPERTISE</h3>
+                <p class="placeholder-desc">This space is a blank canvas, eagerly awaiting the professional milestones, specialized mastery, and industry journeys that lie ahead.</p>
+            </div>
+
+            <!-- H1: INDUSTRIAL & UPSKILLING -->
+            <div class="card">
+                <h2 class="sub-section-title"><i class="fas fa-cogs"></i> INDUSTRIAL & UPSKILLING</h2>
+                <ul class="caps-bullet">
+                    <li>
+                        <div class="skill-title"><i class="fas fa-microchip"></i> PLC & MEMS:</div>
+                        <div class="skill-desc">Foundational knowledge in industrial logic controllers and micro-electromechanical sensors; ready for advanced industry application.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-chart-line"></i> PROCESS OPTIMIZATION:</div>
+                        <div class="skill-desc">Lean Six Sigma methodologies for defect reduction and systematic workflow improvement.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- H1: TECHNICAL SKILLS -->
+            <div class="card">
+                <h2 class="sub-section-title"><i class="fas fa-toolbox"></i> TECHNICAL SKILLS</h2>
+                
+                <h4 class="caps-mini-header">HARDWARE & ARCHITECTURE</h4>
+                <ul class="caps-bullet">
+                    <li>
+                        <div class="skill-title"><i class="fas fa-microchip"></i> IC DESIGN:</div>
+                        <div class="skill-desc">Schematic & Layout implementation.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-code"></i> VERILOG HDL:</div>
+                        <div class="skill-desc">Structural design & automated TCL testbench scripting.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-sitemap"></i> COMPUTER ARCHITECTURE:</div>
+                        <div class="skill-desc">Von Neumann, Harvard concepts, 8085 microprocessor, and ARM/RISC-V fundamentals.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-bolt"></i> DIGITAL & ANALOG ELECTRONICS:</div>
+                        <div class="skill-desc">Core fundamental applications and practical circuit design.</div>
+                    </li>
+                </ul>
+
+                <h4 class="caps-mini-header">SOFTWARE & AUTOMATION</h4>
+                <ul class="caps-bullet" style="margin-bottom: 0;">
+                    <li>
+                        <div class="skill-title"><i class="fab fa-python"></i> PYTHON:</div>
+                        <div class="skill-desc">System automation and integration.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-laptop-code"></i> PROGRAMMING:</div>
+                        <div class="skill-desc">C/C++ & Java (Object-Oriented Programming).</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-robot"></i> AI-ASSISTED WORKFLOW:</div>
+                        <div class="skill-desc">Leveraging AI agents for development efficiency.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- H1: SOFT SKILLS -->
+            <div class="card">
+                <h2 class="sub-section-title"><i class="fas fa-user-cog"></i> SOFT SKILLS</h2>
+                <ul class="caps-bullet" style="margin-bottom: 0;">
+                    <li>
+                        <div class="skill-title"><i class="fas fa-users"></i> LEADERSHIP & TEAMWORK:</div>
+                        <div class="skill-desc">Active in intellectual discussions, leadership initiatives, and building productive professional networks.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-lightbulb"></i> CRITICAL THINKING & ACTIVE LEARNING:</div>
+                        <div class="skill-desc">Prioritizes interactive, two-way communication and continuous intellectual growth.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-tachometer-alt"></i> FAST LEARNER:</div>
+                        <div class="skill-desc">Quickly grasps, explores, and applies new concepts through hands-on experience.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-sync-alt"></i> ADAPTABILITY & INDEPENDENCE:</div>
+                        <div class="skill-desc">Maintains consistent performance in dynamic environments, working independently and unaffected by peer pressure.</div>
+                    </li>
+                    <li>
+                        <div class="skill-title"><i class="fas fa-puzzle-piece"></i> PROBLEM SOLVING:</div>
+                        <div class="skill-desc">Employs a practical "technician mindset" for effective root-cause analysis and troubleshooting.</div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        `;
+
+
+        const page6 = `
+        <h1 class="page-title"><i class="fas fa-project-diagram"></i> PROJECTS & PORTFOLIO</h1>
+
+        <!-- SECTION 1: TECHNICAL FIELD -->
+        <h2 class="sub-section-title"><i class="fas fa-cogs"></i> TECHNICAL FIELD</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">JULY 2026</span>
+                    <h3 class="caps-header">IC DESIGN MINI PROJECT</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> End-to-end IC Design flow from schematic creation to layout implementation.
+                    </div>
+                    <a href="https://github.com/Syafaware/IC-Design-Mini-Project" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> VIEW REPOSITORY
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">JUNE 2026</span>
+                    <h3 class="caps-header">COMPUTER ARCHITECTURE MINI PROJECT (VERILOG HDL)</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> Comprehensive Verilog HDL project covering structural design, automated TCL testbench scripting, and core computer architecture fundamentals.
+                    </div>
+                    <a href="https://github.com/Syafaware/Computer-Architecture-Mini-Project" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> VIEW REPOSITORY
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">FEBRUARY 2026</span>
+                    <h3 class="caps-header">OOP: SMART TEMPERATURE MONITOR SYSTEM</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> Object-Oriented Programming (OOP) application integrating a smart temperature monitoring sensor with real-time Telegram bot warning messages.
+                    </div>
+                    <a href="https://github.com/Syafaware/Object-Oriented-Programming-Mini-Project" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> VIEW REPOSITORY
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">JUNE 2025</span>
+                    <h3 class="caps-header">DIGITAL SYSTEMS: DIGITAL DICE</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> Designed and implemented a Digital Dice system utilizing Moore Finite State Machine (FSM) based on fundamental logic components.
+                    </div>
+                    <a href="https://github.com/Syafaware/Digital-System-Mini-Project" class="project-link" target="_blank">
+                        <i class="fab fa-github"></i> VIEW REPOSITORY
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">MARCH 2024</span>
+                    <h3 class="caps-header">FINAL YEAR PROJECT: ROBOTIC ARM WITH ESP32</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> Technical Writing & Documentation. While the hardware execution faced practical limitations, this project served as a major milestone in technical writing. Took full ownership of synthesizing research, structuring data, and writing the complete A-to-Z project report to ensure successful academic deliverability.
+                    </div>
+                    <div class="no-link">
+                        <i class="fas fa-ban"></i> NO REPOSITORY AVAILABLE
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECTION 2: PERSONAL DEVELOPMENT & GENERAL KNOWLEDGE -->
+        <h2 class="sub-section-title"><i class="fas fa-book-reader"></i> PERSONAL DEVELOPMENT & GENERAL KNOWLEDGE</h2>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">AUGUST 2026</span>
+                    <h3 class="caps-header">FALSAFAH DAN ISU SEMASA COURSEWORK</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> A web-based compilation of academic coursework submissions detailing philosophical analyses and current issue discourses.
+                    </div>
+                    <a href="https://syafaware.github.io/Falsafah-dan-Isu-Semasa" class="project-link" target="_blank">
+                        <i class="fas fa-globe"></i> VISIT WEBSITE
+                    </a>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">JUN 2026</span>
+                    <h3 class="caps-header">TERJEMAHAN BACAAN ARAB</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> A structured, personal compilation of Arabic reading translations, documented for continuous learning and easy reference.
+                    </div>
+                    <a href="https://syafaware.github.io/Terjemahan" class="project-link" target="_blank">
+                        <i class="fas fa-globe"></i> VISIT WEBSITE
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        `;
+
+
+        const page7 = `
+        <h1 class="page-title"><i class="fas fa-star"></i> PAGE TITLE HERE</h1>
+
+        <!-- SECTION 1: TEMPLATE NAME -->
+        <h2 class="sub-section-title"><i class="fas fa-folder-open"></i> SECTION TITLE</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="card">
+                    <span class="badge-year">YYYY - YYYY</span>
+                    <h3 class="caps-header">MAIN HEADER (E.G., PROJECT NAME / SKILL)</h3>
+                    <div class="project-desc">
+                        <strong>FOCUS:</strong> Write your description here. This section is perfect for explanations, summaries, or details.
+                    </div>
+                    <a href="#" class="project-link" target="_blank">
+                        <i class="fas fa-link"></i> BUTTON LINK
+                    </a>
+                </div>
+            </div>
+        </div>
+        `;
+
+    </script>
+</body>
+</html>
